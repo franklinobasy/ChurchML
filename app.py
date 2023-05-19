@@ -6,6 +6,13 @@ import pandas as pd
 app = Flask(__name__)
 swagger = Swagger(app)
 
+# Customize Swagger UI configuration
+app.config['SWAGGER'] = {
+    'title': 'ChurchML',  
+    'description': 'An API for predicting Church Average Monthly Attendance and Income', 
+    'uiversion': 3 
+}
+
 
 @app.route('/predict-income', methods=['POST'])
 def predict_income():
