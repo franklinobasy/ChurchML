@@ -15,35 +15,6 @@ app.config['SWAGGER'] = {
 }
 
 
-@app.route('/apidocs/')
-def swagger_ui():
-    template = """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>{{ title }}</title>
-        <link rel="icon" type="image/x-icon" href="{{ favicon }}">
-        {{ swagger_css }}
-    </head>
-    <body>
-        <h2>{{ description }}</h2>
-        {{ swagger_body }}
-        {{ swagger_js }}
-    </body>
-    </html>
-    """
-
-    rendered_template = render_template_string(template,
-                                              title=app.config['SWAGGER']['title'],
-                                              favicon=app.config['SWAGGER']['favicon'],
-                                              description=app.config["SWAGGER"]["description"],
-                                              swagger_css=swagger.css(),
-                                              swagger_body=swagger.html(),
-                                              swagger_js=swagger.js())
-
-    return rendered_template
-
-
 @app.route('/predict-income', methods=['POST'])
 def predict_income():
     """
