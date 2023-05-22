@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>ChurchML</title>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row py-5">
+        <div class="col-sm-12 d-flex justify-content-center">
+          <div>
+            <h1 class="border-bottom mb-5">ChurchML Prediction WebApp</h1>
+            <div id="content">
+              <!-- The initial form -->
+              <div class="form" id="formPredictIncome" >
+                <h2>Predict Income</h2>
+                <form>
+                  <fieldset>
+                    <div class="mb-3">
+                      <label for="incomeMonth" class="form-label">Select Month</label>
+                      <select id="incomeMonth" class="form-select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="incomeYear" class="form-label">Select Year</label>
+                      <select id="incomeYear" class="form-select">
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                      </select>
+                    </div>
+                    <button class="btn btn-outline-success" type="button" onclick="postIncomeData()">predict</button>
+                  </fieldset>
+                </form>
+                <div class="incomeOutput bg-success bg-opacity-10 border border-success border-4 rounded text-center text-white mt-3" style="height: 50px; font-size: 30px;">
+                  0
+                </div>
+                <button class="btn btn-primary my-4" type="button" onclick="showForm('formPredictAttendance')">Go to Attendance Prediction</button>
+              </div>
+      
+              <!-- The second form (hidden initially) -->
+              <div class="form" id="formPredictAttendance" style="display: none;">
+                <h2>Predict Attendance</h2>
+                <form>
+                  <fieldset>
+                    <div class="mb-3">
+                      <label for="attendanceMonth" class="form-label">Select Month</label>
+                      <select id="attendanceMonth" class="form-select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="attendanceYear" class="form-label">Select Year</label>
+                      <select id="attendanceYear" class="form-select">
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                      </select>
+                    </div>
+                    <button class="btn btn-outline-success" type="button" onclick="postAttendanceData()">predict</button>
+                  </fieldset>
+                </form>
+                <div class="attendanceOutput bg-success bg-opacity-10 border border-success border-4 rounded text-center text-white mt-3" style="height: 50px; font-size: 30px;">
+                  0
+                </div>
+                <button class="btn btn-primary my-4" type="button" onclick="showForm('formPredictIncome')">Go to Income Prediction</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+      function showForm(formId) {
+        // Hide all forms
+        document.querySelectorAll('div.form').forEach(function(form) {
+          form.style.display = 'none';
+        });
+    
+        // Show the selected form
+        document.getElementById(formId).style.display = 'block';
+      }
+    
+      function postIncomeData() {
+        let month = document.getElementById('incomeMonth').value;
+        let year = document.getElementById('incomeYear').value;
+        let data = {
+          month: month,
+          year: year
+        };
+    
+        let apiUrl = "{{ url_for('predict_income') }}";
+    
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+          let output = document.getElementsByClassName("incomeOutput")[0];
+          output.innerText = data.value;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    
+      function postAttendanceData() {
+        let month = document.getElementById('attendanceMonth').value;
+        let year = document.getElementById('attendanceYear').value;
+        let data = {
+          month: month,
+          year: year
+        };
+    
+        let apiUrl = "{{ url_for('predict_attendance') }}";
+    
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+          let output = document.getElementsByClassName("attendanceOutput")[0];
+          output.innerText = data.value;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    </script>
+  </body>
+</html>

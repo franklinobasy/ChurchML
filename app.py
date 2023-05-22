@@ -1,5 +1,11 @@
 import pickle
-from flask import Flask, jsonify, request, render_template_string
+from flask import (
+    Flask,
+    jsonify,
+    render_template,
+    request,
+    url_for,
+)
 from flasgger import Swagger
 import pandas as pd
 
@@ -68,7 +74,7 @@ def predict_income():
         {
             'status': "ok",
             "date": date,
-            'value': value
+            'value': f"{value:.4f}"
         }
     )
 
@@ -126,9 +132,14 @@ def predict_attendance():
         {
             'status': "ok",
             "date": date,
-            'value': value
+            'value': f"{int(value)}"
         }
     )
+
+
+@app.route('/')
+def index():
+    return render_template('index.html', url_for=url_for)
 
 
 if __name__ == '__main__':
