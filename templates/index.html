@@ -12,13 +12,13 @@
 
   </head>
   <body>
-    <div class="container">
+    <div class="container py-5">
       <div class="row py-5">
-        <div class="col-sm-12 d-flex justify-content-center">
+        <div class="col d-flex justify-content-center">
           <div>
             <div id="content">
               <!-- The initial form -->
-              <div class="form" id="formPredictIncome" >
+              <div class="form w-100" id="formPredictIncome" >
                 <h2>Predict Income</h2>
                 <form>
                   <fieldset>
@@ -52,14 +52,14 @@
                     <button class="btn btn-outline-success" type="button" onclick="postIncomeData()">predict</button>
                   </fieldset>
                 </form>
-                <div class="incomeOutput bg-success bg-opacity-10 border border-success border-4 rounded text-center text-white mt-3" style="height: 50px; font-size: 30px;">
+                <div class="incomeOutput bg-success bg-opacity-10 border border-success border-4 rounded text-center text-white mt-3" style="width:250px; height: 50px; font-size: 30px;">
                   0
                 </div>
                 <button class="btn btn-primary my-4" type="button" onclick="showForm('formPredictAttendance')">Go to Attendance Prediction</button>
               </div>
       
               <!-- The second form (hidden initially) -->
-              <div class="form" id="formPredictAttendance" style="display: none;">
+              <div class="form w-100" id="formPredictAttendance" style="display: none;">
                 <h2>Predict Attendance</h2>
                 <form>
                   <fieldset>
@@ -93,7 +93,7 @@
                     <button class="btn btn-outline-success" type="button" onclick="postAttendanceData()">predict</button>
                   </fieldset>
                 </form>
-                <div class="attendanceOutput bg-success bg-opacity-10 border border-success border-4 rounded text-center text-white mt-3" style="height: 50px; font-size: 30px;">
+                <div class="attendanceOutput bg-success bg-opacity-10 border border-success border-4 rounded text-center text-white mt-3" style="width: 250px; height: 50px; font-size: 30px;">
                   0
                 </div>
                 <button class="btn btn-primary my-4" type="button" onclick="showForm('formPredictIncome')">Go to Income Prediction</button>
