@@ -16,7 +16,6 @@
       <div class="row py-5">
         <div class="col-sm-12 d-flex justify-content-center">
           <div>
-            <h1 class="border-bottom mb-5">ChurchML Prediction WebApp</h1>
             <div id="content">
               <!-- The initial form -->
               <div class="form" id="formPredictIncome" >
@@ -115,7 +114,7 @@
         // Show the selected form
         document.getElementById(formId).style.display = 'block';
       }
-    
+
       function postIncomeData() {
         let month = document.getElementById('incomeMonth').value;
         let year = document.getElementById('incomeYear').value;
@@ -142,7 +141,7 @@
           console.error('Error:', error);
         });
       }
-    
+
       function postAttendanceData() {
         let month = document.getElementById('attendanceMonth').value;
         let year = document.getElementById('attendanceYear').value;
