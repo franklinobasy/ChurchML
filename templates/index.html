@@ -40,6 +40,15 @@
           <div>
             <div id="content">
               {% block content %}
+              <h1>ChurchML Prediction App</h1>
+              <div class="row">
+                <div class="col">
+                  <a href="{{ url_for('attendance') }}" class="btn btn-primary my-4 w-100">Predict Attendance</a>
+                </div>
+                <div class="col">
+                  <a href="{{ url_for('income') }}" class="btn btn-primary my-4 w-100">Predict Income</a>
+                </div>
+              </div>
               {% endblock %}
             </div>
           </div>
