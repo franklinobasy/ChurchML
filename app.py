@@ -142,5 +142,15 @@ def index():
     return render_template('index.html', url_for=url_for)
 
 
+@app.route('/predictIncome')
+def income():
+    return render_template("income.html", url_for=url_for)
+  
+
+@app.route('/predictAttendance')
+def attendance():
+    return render_template("attendance.html", url_for=url_for)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
