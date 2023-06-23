@@ -144,13 +144,23 @@ def index():
 
 @app.route('/predictIncome')
 def income():
-    return render_template("income.html", url_for=url_for)
+    return render_template(
+      "income.html",
+      url_for=url_for,
+      years=range(2023, 2100),
+      months=range(1, 13)
+    )
   
 
 @app.route('/predictAttendance')
 def attendance():
-    return render_template("attendance.html", url_for=url_for)
+    return render_template(
+      "attendance.html",
+      url_for=url_for,
+      years=range(2023, 2100),
+      months=range(1, 13)
+    )
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
